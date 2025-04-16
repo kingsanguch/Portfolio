@@ -1,0 +1,84 @@
+/* Hero Section Gradient */
+.bg-gradient {
+  background: linear-gradient(135deg, rgba(41, 41, 49, 0.8), rgba(46, 42, 51, 0.8)) !important; /* Gradient overlay only */
+}
+
+/* Style for the background image in HTML */
+.hero-background-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Equivalent to background-size: cover */
+  object-position: center; /* Equivalent to background-position: center */
+  z-index: -1; /* Place the image behind the content */
+}
+
+/* Ensure Hero content is visible by default */
+.hero-content {
+  opacity: 1;
+  visibility: visible;
+  position: relative; /* Ensure content stays above the image */
+  z-index: 1; /* Place content above the background image */
+}
+
+/* Explicitly ensure all Hero children are visible */
+.hero-content h2,
+.hero-content p,
+.hero-content a {
+  opacity: 1 !important;
+  visibility: visible !important;
+  display: block !important;
+}
+
+/* Style for the "View My Work" button */
+.view-my-work-btn {
+  padding: 0.5rem 1.5rem; /* Reduce padding to shorten the button */
+  border-radius: 25px !important; /* Increase border-radius for a well-curved look */
+}
+
+/* Hover Effects for Project Cards */
+.project-card {
+  transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Button Scale Hover */
+.scale-hover:hover {
+  transform: scale(1.05);
+  transition: transform 0.3s ease;
+}
+
+/* Ensure images are responsive */
+.card-img-top,
+.rounded-circle {
+  object-fit: cover;
+}
+
+/* Adjust navbar for mobile */
+@media (max-width: 991.98px) {
+  .navbar-nav {
+    text-align: center;
+  }
+  .nav-link {
+    padding: 0.5rem 0;
+  }
+}
+
+/* Fade-in for GSAP animations (non-Hero sections) */
+.fade-in {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+/* Fallback for non-Hero sections */
+#about .fade-in,
+#projects .fade-in,
+#contact .fade-in {
+  opacity: 1; /* Fallback for other sections */
+}
