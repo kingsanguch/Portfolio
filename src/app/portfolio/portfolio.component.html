@@ -16,16 +16,21 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto">
         <li class="nav-item">
-          <a class="nav-link" href="#home">Home</a>
+          <a class="nav-link fw-bold text-primary" href="#home">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#about">About</a>
+          <a class="nav-link fw-bold text-primary" href="#about">About</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#projects">Projects</a>
+          <a class="nav-link fw-bold text-primary" href="#projects">Projects</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#contact">Contact</a>
+          <a class="nav-link fw-bold text-primary" href="#contact">Contact</a>
+        </li>
+        <li class="nav-item">
+          <button class="btn btn-outline-primary" (click)="toggleTheme()">
+            {{ isDarkMode ? 'Light Mode' : 'Dark Mode' }}
+          </button>
         </li>
       </ul>
     </div>
@@ -37,9 +42,8 @@
   id="home"
   class="min-vh-100 d-flex align-items-center justify-content-center text-white bg-gradient position-relative"
 >
-  <!-- Background Image -->
   <img
-    src="assets/full-stack-developer.jpg"
+    src="assets/homee.jpg"
     alt="Background image of a full-stack developer setup"
     class="hero-background-img"
   />
@@ -57,46 +61,96 @@
 
 <!-- About Section -->
 <section id="about" class="py-5 bg-white">
-  <div class="container fade-in">
-    <h2 class="display-5 fw-bold text-center mb-5">About Me</h2>
-    <div class="row align-items-center">
-      <div class="col-md-4 text-center mb-4 mb-md-0">
-        <img
-          src="assets/john-image.png"
-          alt="John Sangura"
-          class="rounded-circle img-fluid fade-in"
-        />
+  <div class="container">
+    <!-- Typed.js intro -->
+    <h2 class="display-5 fw-bold text-center mb-3">
+      <span id="typed"></span><span class="cursor">|</span>
+    </h2>
+
+    <!-- SVG blob + tilt portrait -->
+    <div class="blob-bg mb-4">
+      <svg viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
+        <g transform="translate(300,300)">
+          <path fill="var(--primary-color)">
+            <animate
+              attributeName="d"
+              dur="10s"
+              repeatCount="indefinite"
+              values="M74...Z; M60...Z; M74...Z"
+            />
+          </path>
+        </g>
+      </svg>
+      <div class="tilt-wrapper" data-tilt data-tilt-max="15" data-tilt-speed="400">
+        <img src="assets/john-image.png" alt="John Sangura" class="rounded-circle img-fluid" />
       </div>
-      <div class="col-md-8">
-        <p class="lead fade-in">
-          I'm a passionate full-stack developer proficient in Angular, Bootstrap,
-          TypeScript/JavaScript for front-end, and Java, Spring Boot, MySQL/PostgreSQL,
-          Postman, SQL, and Swagger for back-end development. I specialize in building
-          scalable, user-friendly applications and thrive on turning ideas into reality.
+    </div>
+
+    <!-- About Paragraph (Full Width) -->
+    <div class="row">
+      <div class="col-12">
+        <p class="lead fade-in text-center">
+          I'm a passionate full‑stack developer proficient in Angular, Bootstrap,
+          TypeScript/JavaScript for front‑end, and Java, Spring Boot,
+          MySQL/PostgreSQL, Postman, SQL, Swagger for back‑end. I specialize in
+          building scalable, user‑friendly applications and thrive on turning
+          ideas into reality.
         </p>
-        <div class="mt-4 fade-in">
-          <a
-            href="https://github.com/kingsanguch"
-            class="text-primary me-3"
-            target="_blank"
-            aria-label="GitHub Profile"
+      </div>
+    </div>
+
+    <!-- Timeline -->
+    <div class="timeline-container">
+      <div class="row mt-4 justify-content-center">
+        <div class="col-lg-8">
+          <ul class="timeline">
+            <li class="fade-in"><span class="date">2020</span> Started as Junior Dev</li>
+            <li class="fade-in"><span class="date">2021</span> Built First Angular App</li>
+            <li class="fade-in"><span class="date">2023</span> Led Team Projects</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Skills with Circular Animation -->
+    <div class="row mt-5">
+      <div class="col-12 text-center mb-1">
+        <h2 class="section-title">Tech‑Stack</h2>
+      </div>
+      <div class="col-12">
+        <div class="skills-grid">
+          <div
+            class="tech-marble tilt-wrapper fade-in"
+            *ngFor="let skill of techSkills; let i = index"
+            [attr.data-index]="i"
           >
-            <i class="bi bi-github fs-4"></i>
+            <span>{{ skill }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Social Links and Resume Button -->
+    <div class="row mt-2 justify-content-center">
+      <div class="col-auto">
+        <div class="social-links d-flex align-items-center">
+          <a href="https://github.com/kingsanguch" target="_blank" rel="noopener noreferrer">
+            <div class="social-icon">
+              <ng-lottie [options]="githubOptions"></ng-lottie>
+            </div>
           </a>
           <a
-            href="https://linkedin.com/in/john-sangura"
-            class="text-primary me-3"
+            href="https://www.linkedin.com/in/john-sangura"
             target="_blank"
-            aria-label="LinkedIn Profile"
+            rel="noopener noreferrer"
+            class="ms-2"
           >
-            <i class="bi bi-linkedin fs-4"></i>
+            <div class="social-icon">
+              <ng-lottie [options]="linkedinOptions"></ng-lottie>
+            </div>
           </a>
-          <a
-            href="assets/John-sangura.pdf"
-            class="btn btn-outline-primary"
-            download
-          >
-            <i class="bi bi-download me-2"></i>Download Resume
+          <a href="assets/John-sangura.pdf" class="btn btn-outline-primary ms-2 small-btn" download>
+            <i class="bi bi-download me-1"></i>Download Resume
           </a>
         </div>
       </div>
@@ -104,122 +158,116 @@
   </div>
 </section>
 
-<!-- Projects Section -->
+<!-- Projects Section with Swiper -->
 <section id="projects" class="py-5 bg-light">
-  <div class="container fade-in">
+  <div class="container">
     <h2 class="display-5 fw-bold text-center mb-5">My Projects</h2>
-    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-      <!-- Project 1 -->
-      <div class="col">
-        <div class="card h-100 project-card fade-in">
-          <img
-            src="assets/car-imports.png"
-            class="card-img-top"
-            alt="Car Importation and Shipping"
-          />
-          <div class="card-body">
-            <h3 class="card-title fw-semibold">Car Importation and Shipping</h3>
-            <p class="card-text">
-              A platform for managing car importation and shipping processes, built
-              with Angular and Spring Boot.
+        <!-- 1. Intro paragraph full‑width in this row -->
+        <div class="row">
+          <div class="col-12">
+            <p class="lead text-center mb-5">
+              These projects demonstrate my expertise with practical examples of some of my work, including brief descriptions and links to code repositories and live demos. They showcase my ability to tackle intricate challenges, adapt to various technologies, and efficiently oversee projects.
             </p>
-            <a href="#" class="btn btn-primary stretched-link">
-              <i class="bi bi-eye me-2"></i>View Project
-            </a>
+          </div>
+        </div>    
+    <div class="swiper">
+      <div class="swiper-wrapper">
+        <!-- Project 1 -->
+        <div class="swiper-slide">
+          <div class="card h-100 project-card">
+            <img src="assets/car-imports.png" class="card-img-top" alt="Car Importation and Shipping" />
+            <div class="card-body">
+              <h3 class="card-title fw-semibold">Car Importation and Shipping</h3>
+              <p class="card-text">
+                A platform for managing car importation and shipping processes, built with Angular and Spring Boot.
+              </p>
+              <a href="#" class="btn btn-primary stretched-link">
+                <i class="bi bi-eye me-2"></i>View Project
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 2 -->
+        <div class="swiper-slide">
+          <div class="card h-100 project-card">
+            <img src="assets/loan-management.jpg" class="card-img-top" alt="Loan Management System" />
+            <div class="card-body">
+              <h3 class="card-title fw-semibold">Loan Management System</h3>
+              <p class="card-text">
+                An application for tracking loans and repayments, using Java and MySQL.
+              </p>
+              <a href="https://loan-management-system-two.vercel.app/layout/loans" target="_blank" rel="noopener" class="btn btn-primary stretched-link">
+                <i class="bi bi-eye me-2"></i>View Project
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 3 -->
+        <div class="swiper-slide">
+          <div class="card h-100 project-card">
+            <img src="assets/event-management.jpg" class="card-img-top" alt="Event Management System" />
+            <div class="card-body">
+              <h3 class="card-title fw-semibold">Event Management System</h3>
+              <p class="card-text">
+                A system for organizing and managing events, built with Angular and Spring Boot.
+              </p>
+              <a href="https://event-management-system-ochre.vercel.app/tickets" target="_blank" rel="noopener" class="btn btn-primary stretched-link">
+                <i class="bi bi-eye me-2"></i>View Project
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 4 -->
+        <div class="swiper-slide">
+          <div class="card h-100 project-card">
+            <img src="assets/task-management.jpg" class="card-img-top" alt="Task Manager" />
+            <div class="card-body">
+              <h3 class="card-title fw-semibold">Task Manager</h3>
+              <p class="card-text">
+                A task management tool for teams, developed with TypeScript and PostgreSQL.
+              </p>
+              <a href="https://to-do-task-eta.vercel.app/task" target="_blank" rel="noopener" class="btn btn-primary stretched-link">
+                <i class="bi bi-eye me-2"></i>View Project
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 5 -->
+        <div class="swiper-slide">
+          <div class="card h-100 project-card">
+            <img src="assets/Atm-transaction.jpg" class="card-img-top" alt="Customer-ATM Transaction Management" />
+            <div class="card-body">
+              <h3 class="card-title fw-semibold">Customer-ATM Transaction Management</h3>
+              <p class="card-text">
+                A system for managing ATM transactions, built with Java and Spring Boot.
+              </p>
+              <a href="https://fintech-banking-system.vercel.app/atm-card" target="_blank" rel="noopener" class="btn btn-primary stretched-link">
+                <i class="bi bi-eye me-2"></i>View Project
+              </a>
+            </div>
           </div>
         </div>
       </div>
-      <!-- Project 2 -->
-      <div class="col">
-        <div class="card h-100 project-card fade-in">
-          <img
-            src="assets/loan-management.jpg"
-            class="card-img-top"
-            alt="Loan Management System"
-          />
-          <div class="card-body">
-            <h3 class="card-title fw-semibold">Loan Management System</h3>
-            <p class="card-text">
-              An application for tracking loans and repayments, using Java and
-              MySQL.
-            </p>
-            <a href="#" class="btn btn-primary stretched-link">
-              <i class="bi bi-eye me-2"></i>View Project
-            </a>
-          </div>
-        </div>
-      </div>
-      <!-- Project 3 -->
-      <div class="col">
-        <div class="card h-100 project-card fade-in">
-          <img
-            src="assets/event-management.jpg"
-            class="card-img-top"
-            alt="Event Management System"
-          />
-          <div class="card-body">
-            <h3 class="card-title fw-semibold">Event Management System</h3>
-            <p class="card-text">
-              A system for organizing and managing events, built with Angular and
-              Spring Boot.
-            </p>
-            <a href="#" class="btn btn-primary stretched-link">
-              <i class="bi bi-eye me-2"></i>View Project
-            </a>
-          </div>
-        </div>
-      </div>
-      <!-- Project 4 -->
-      <div class="col">
-        <div class="card h-100 project-card fade-in">
-          <img
-            src="assets/task-management.jpg"
-            class="card-img-top"
-            alt="Task Manager"
-          />
-          <div class="card-body">
-            <h3 class="card-title fw-semibold">Task Manager</h3>
-            <p class="card-text">
-              A task management tool for teams, developed with TypeScript and
-              PostgreSQL.
-            </p>
-            <a href="#" class="btn btn-primary stretched-link">
-              <i class="bi bi-eye me-2"></i>View Project
-            </a>
-          </div>
-        </div>
-      </div>
-      <!-- Project 5 -->
-      <div class="col">
-        <div class="card h-100 project-card fade-in">
-          <img
-            src="assets/Atm-transaction.jpg"
-            class="card-img-top"
-            alt="Customer-ATM Transaction Management"
-          />
-          <div class="card-body">
-            <h3 class="card-title fw-semibold">
-              Customer-ATM Transaction Management
-            </h3>
-            <p class="card-text">
-              A system for managing ATM transactions, built with Java and Spring
-              Boot.
-            </p>
-            <a href="#" class="btn btn-primary stretched-link">
-              <i class="bi bi-eye me-2"></i>View Project
-            </a>
-          </div>
-        </div>
-      </div>
+
+      <!-- Swiper Navigation -->
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
+      
+      <!-- Swiper Pagination -->
+      <div class="swiper-pagination"></div>
     </div>
   </div>
 </section>
 
 <!-- Contact Section -->
 <section id="contact" class="py-5 bg-white">
-  <div class="container fade-in">
+  <div class="container">
     <h2 class="display-5 fw-bold text-center mb-5">Get in Touch</h2>
-    <form class="col-md-6 mx-auto fade-in" (ngSubmit)="onSubmit()">
+    <form class="col-md-6 mx-auto" (ngSubmit)="onSubmit()">
       <div class="mb-3">
         <label for="name" class="form-label">Name</label>
         <input
