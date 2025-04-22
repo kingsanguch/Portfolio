@@ -1,14 +1,14 @@
 {
-    "extends": "./tsconfig.app.json",
-    "compilerOptions": {
-      "outDir": "./dist/out-tsc/server",
-      "target": "es2016",
-      "module": "commonjs",
-      "types": ["node"]
-    },
-    "files": ["server.ts"],
-    "angularCompilerOptions": {
-      "entryModule": "./src/app/app.server.module#AppServerModule"
-    }
+  "extends": "./tsconfig.app.json",
+  "compilerOptions": {
+    "outDir": "./dist/out-tsc/server",
+    "target": "es2020",
+    "module": "es2020", // <= important
+    "types": [],
+    "bundler": true // <= OK because module is es2020
+  },
+  "files": ["src/main.server.ts"],
+  "angularCompilerOptions": {
+    "enableIvy": true
   }
-  
+}
