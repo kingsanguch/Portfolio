@@ -1,3 +1,4 @@
+// portfolio.component.ts
 import {
   Component,
   AfterViewInit,
@@ -32,9 +33,15 @@ import Swiper from 'swiper/bundle';
   styleUrls: ['./portfolio.component.css']
 })
 export class PortfolioComponent implements AfterViewInit {
+  // --- contact form state ---
   formData = { name: '', email: '', message: '' };
+  formSubmitted = false;
+  submissionError = false;
+
+  // --- dark mode toggle ---
   isDarkMode = true;
 
+  // --- Lottie icons ---
   githubOptions: AnimationOptions = {
     path: 'assets/github.json',
     autoplay: true,
@@ -46,6 +53,7 @@ export class PortfolioComponent implements AfterViewInit {
     loop: true
   };
 
+  // --- tech skills for your marbles/typed/etc. ---
   techSkills: string[] = [
     'REST API',
     'Bootstrap',
@@ -69,13 +77,12 @@ export class PortfolioComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     if (isPlatformBrowser(this.platformId)) {
-      // Delay to ensure DOM is fully rendered
       setTimeout(() => {
         this.initTyped();
         this.initAnimations();
         this.initTilt();
         this.initSwiper();
-      }, 100); // Increased delay to 100ms
+      }, 100);
     }
   }
 
@@ -137,10 +144,7 @@ export class PortfolioComponent implements AfterViewInit {
       opacity: 1,
       duration: 1,
       ease: 'power2.out',
-      scrollTrigger: {
-        trigger: '#about',
-        start: 'top 90%' // Adjusted to trigger earlier
-      }
+      scrollTrigger: { trigger: '#about', start: 'top 90%' }
     });
 
     // About paragraph
@@ -179,7 +183,7 @@ export class PortfolioComponent implements AfterViewInit {
     // Tech marbles
     const marbles = gsap.utils.toArray<HTMLElement>('.tech-marble.fade-in');
     const numMarbles = marbles.length;
-    const radius = Math.max(150, 20 * numMarbles); // Dynamic radius to prevent overlap
+    const radius = Math.max(150, 20 * numMarbles);
     marbles.forEach((el, i) => {
       gsap.set(el, { opacity: 0, scale: 0 });
       gsap.to(el, {
@@ -187,11 +191,7 @@ export class PortfolioComponent implements AfterViewInit {
         scale: 1,
         duration: 0.8,
         ease: 'back.out(1.7)',
-        scrollTrigger: {
-          trigger: el,
-          start: 'top 90%',
-          toggleActions: 'play none none reverse'
-        },
+        scrollTrigger: { trigger: el, start: 'top 90%', toggleActions: 'play none none reverse' },
         onComplete: () => {
           const angle = (i / numMarbles) * Math.PI * 2;
           gsap.to(el, {
@@ -271,21 +271,40 @@ export class PortfolioComponent implements AfterViewInit {
     document.body.classList.toggle('light-mode', !this.isDarkMode);
   }
 
-  onSubmit() {
-    const { name, email, message } = this.formData;
-    if (isPlatformBrowser(this.platformId)) {
-      (window as any).Email.send({
-        SecureToken: 'your-secure-token',
-        To: 'your-email@example.com',
-        From: email,
-        Subject: `New message from ${name}`,
-        Body: message
-      }).then(() => {
+  // ← updated onSubmit
+  onSubmit(): void {
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
+    }
+    this.submissionError = false;
+
+    const payload = new FormData();
+    payload.append('name', this.formData.name);
+    payload.append('email', this.formData.email);
+    payload.append('message', this.formData.message);
+    payload.append('_subject', 'New message from your site');
+    payload.append('_captcha', 'false');
+
+    fetch('https://formspree.io/f/mvgaoqrd', {
+      method: 'POST',
+      body: payload,
+      headers: { 'Accept': 'application/json' }
+    })
+    .then((response): Promise<void> => {
+      if (response.ok) {
         this.ngZone.run(() => {
-          alert('Message sent successfully!');
+          this.formSubmitted = true;
           this.formData = { name: '', email: '', message: '' };
         });
+        return Promise.resolve();
+      }
+      // ensure we return a promise in the error path too
+      return response.json().then(err => Promise.reject(err));
+    })
+    .catch(() => {
+      this.ngZone.run(() => {
+        this.submissionError = true;
       });
-    }
+    });
   }
 }

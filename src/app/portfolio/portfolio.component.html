@@ -37,27 +37,45 @@
   </div>
 </nav>
 
+<!--  hero section -->
+
 <!-- Hero Section -->
 <section
   id="home"
-  class="min-vh-100 d-flex align-items-center justify-content-center text-white bg-gradient position-relative"
+  class="carousel slide carousel-fade min-vh-100 position-relative"
+  data-bs-ride="carousel"
+  data-bs-interval="false"
 >
-  <img
-    src="assets/homee.jpg"
-    alt="Background image of a full-stack developer setup"
-    class="hero-background-img"
-  />
-  <div class="container text-center hero-content">
-    <h2 class="display-4 fw-bold mb-4">Hi, I'm John Sangura</h2>
-    <p class="lead mb-4">A Full-Stack Developer crafting innovative solutions</p>
-    <a
-      href="#projects"
-      class="btn btn-light btn-lg text-primary fw-semibold scale-hover view-my-work-btn"
-    >
-      View My Work
-    </a>
+  <div class="carousel-inner min-vh-100">
+    <div class="carousel-item active">
+      <img
+        src="assets/homee.jpg"
+        alt="Developer workspace"
+        class="d-block w-100 vh-100 object-fit-cover"
+      />
+      <div class="position-absolute top-50 start-50 translate-middle text-center text-white bg-dark bg-opacity-50 p-4 rounded">
+        <!-- More creative, descriptive headline -->
+        <h2 class="display-4 fw-bold mb-3">
+          Turning Vision into Interactive Realities
+        </h2>
+
+        <!-- A punchier sub-tagline that still mentions your name -->
+        <p class="lead mb-4">
+          I’m <strong>John Sangura</strong>, your Digital Architect weaving front-end flair with back-end robustness.
+        </p>
+
+        <!-- Shortened button -->
+        <a
+          href="#projects"
+          class="btn btn-outline-light btn-lg px-4 fw-semibold"
+        >
+          See Projects
+        </a>
+      </div>
+    </div>
   </div>
 </section>
+
 
 <!-- About Section -->
 <section id="about" class="py-5 bg-white">
@@ -87,27 +105,162 @@
     </div>
 
     <!-- About Paragraph (Full Width) -->
-    <div class="row">
-      <div class="col-12">
-        <p class="lead fade-in text-center">
-          I'm a passionate full‑stack developer proficient in Angular, Bootstrap,
-          TypeScript/JavaScript for front‑end, and Java, Spring Boot,
-          MySQL/PostgreSQL, Postman, SQL, Swagger for back‑end. I specialize in
-          building scalable, user‑friendly applications and thrive on turning
-          ideas into reality.
-        </p>
+<div class="row">
+  <div class="col-12">
+    <!-- Bootstrap Carousel Fade -->
+    <div
+      id="aboutCarousel"
+      class="carousel slide carousel-fade"
+      data-bs-ride="carousel"
+      data-bs-interval="8000"
+      style="--bs-transition-duration: .3s;"
+    >
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <!-- Glitter + Fade-Out-Up SVG (multiline) -->
+          <div class="text-center mb-4">
+            <svg
+              width="100%"
+              height="200"
+              viewBox="0 0 800 200"
+              preserveAspectRatio="xMidYMid meet"
+            >
+              <defs>
+                <linearGradient id="glitterGrad">
+                  <stop offset="0%" stop-color="purple">
+                    <animate
+                      attributeName="stop-color"
+                      values="purple;blue;purple"
+                      dur="4s"
+                      repeatCount="indefinite"
+                    />
+                  </stop>
+                  <stop offset="100%" stop-color="blue">
+                    <animate
+                      attributeName="stop-color"
+                      values="blue;purple;blue"
+                      dur="4s"
+                      repeatCount="indefinite"
+                    />
+                  </stop>
+                </linearGradient>
+              </defs>
+
+              <!-- multiline paragraph via tspans -->
+              <text
+                x="50%"
+                y="20"
+                dominant-baseline="hanging"
+                text-anchor="middle"
+                font-size="1.1rem"
+                font-family="sans-serif"
+                fill="url(#glitterGrad)"
+              >
+                <tspan x="50%" dy="0">I'm a passionate full-stack developer proficient in Angular, Bootstrap,</tspan>
+                <tspan x="50%" dy="1.4em">TypeScript/JavaScript for front-end, and Java, Spring Boot,</tspan>
+                <tspan x="50%" dy="1.4em">MySQL/PostgreSQL, Postman, SQL, Swagger for back-end. I specialize in</tspan>
+                <tspan x="50%" dy="1.4em">building scalable, user-friendly applications and thrive on turning</tspan>
+                <tspan x="50%" dy="1.4em">ideas into reality.</tspan>
+              </text>
+
+              <!-- 8s fade-out-up cycle -->
+              <animateTransform
+                attributeName="transform"
+                type="translate"
+                values="0,0; 0,-10; 0,0"
+                dur="8s"
+                repeatCount="indefinite"
+              />
+              <animate
+                attributeName="opacity"
+                values="1; 0; 1"
+                keyTimes="0; 0.5; 1"
+                dur="8s"
+                repeatCount="indefinite"
+              />
+            </svg>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <p class="lead text-center mb-0">&nbsp;</p>
+        </div>
       </div>
     </div>
+  </div>
+</div>
 
     <!-- Timeline -->
     <div class="timeline-container">
       <div class="row mt-4 justify-content-center">
         <div class="col-lg-8">
-          <ul class="timeline">
-            <li class="fade-in"><span class="date">2020</span> Started as Junior Dev</li>
-            <li class="fade-in"><span class="date">2021</span> Built First Angular App</li>
-            <li class="fade-in"><span class="date">2023</span> Led Team Projects</li>
+          <ul class="timeline accordion" id="timelineAccordion">
+            <!-- 2020 -->
+            <li class="accordion-item">
+              <h2 class="accordion-header" id="heading2020">
+                <button class="accordion-button collapsed" type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#collapse2020"
+                        aria-expanded="false"
+                        aria-controls="collapse2020">
+                  <span class="date">2020</span> Began as a Junior Developer
+                </button>
+              </h2>
+              <div id="collapse2020"
+                   class="accordion-collapse collapse"
+                   aria-labelledby="heading2020"
+                   data-bs-parent="#timelineAccordion">
+                <div class="accordion-body">
+                  <strong>Java Foundations:</strong>  
+                  Onboarding into real-world projects, I cut my teeth writing core Java services—learning OOP best practices, collection APIs, and JDBC to interact with MySQL. I also began writing simple unit tests with JUnit and Mockito.
+                </div>
+              </div>
+            </li>
+          
+            <!-- 2021 -->
+            <li class="accordion-item">
+              <h2 class="accordion-header" id="heading2021">
+                <button class="accordion-button collapsed" type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#collapse2021"
+                        aria-expanded="false"
+                        aria-controls="collapse2021">
+                  <span class="date">2021</span> Built My First Angular App
+                </button>
+              </h2>
+              <div id="collapse2021"
+                   class="accordion-collapse collapse"
+                   aria-labelledby="heading2021"
+                   data-bs-parent="#timelineAccordion">
+                <div class="accordion-body">
+                  <strong>Angular 12 Project:</strong>  
+                  I scaffoled an Angular 12 SPA, set up routing and Reactive Forms, and consumed REST endpoints from Java backend. I got hands-on with Bootstrap 5 for layout and began mastering component-based architecture, lifecycle hooks, and RxJS observables.
+                </div>
+              </div>
+            </li>
+          
+            <!-- 2023 -->
+            <li class="accordion-item">
+              <h2 class="accordion-header" id="heading2023">
+                <button class="accordion-button collapsed" type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#collapse2023"
+                        aria-expanded="false"
+                        aria-controls="collapse2023">
+                  <span class="date">2023</span> Leading Full-Stack Initiatives
+                </button>
+              </h2>
+              <div id="collapse2023"
+                   class="accordion-collapse collapse"
+                   aria-labelledby="heading2023"
+                   data-bs-parent="#timelineAccordion">
+                <div class="accordion-body">
+                  <strong>Spring Boot & JavaScript:</strong>  
+                  Transitioned into leading cross-functional teams building Spring Boot microservices with Swagger documentation and secured with JWT. On the front end, I established coding standards for Angular projects (v14+), integrated WebSocket notifications, and introduced TypeScript best practices for the team.
+                </div>
+              </div>
+            </li>
           </ul>
+          
         </div>
       </div>
     </div>
@@ -227,7 +380,7 @@
             <div class="card-body">
               <h3 class="card-title fw-semibold">Task Manager</h3>
               <p class="card-text">
-                A task management tool for teams, developed with TypeScript and PostgreSQL.
+                A task management tool for teams, developed with TypeScript, HTML and Bootstrap.
               </p>
               <a href="https://to-do-task-eta.vercel.app/task" target="_blank" rel="noopener" class="btn btn-primary stretched-link">
                 <i class="bi bi-eye me-2"></i>View Project
@@ -262,49 +415,73 @@
     </div>
   </div>
 </section>
-
 <!-- Contact Section -->
 <section id="contact" class="py-5 bg-white">
   <div class="container">
     <h2 class="display-5 fw-bold text-center mb-5">Get in Touch</h2>
-    <form class="col-md-6 mx-auto" (ngSubmit)="onSubmit()">
+
+    <!-- show form only until submitted -->
+    <form
+      *ngIf="!formSubmitted"
+      class="col-md-6 mx-auto"
+      #contactForm="ngForm"
+      (ngSubmit)="onSubmit()"
+      novalidate
+    >
       <div class="mb-3">
         <label for="name" class="form-label">Name</label>
         <input
           type="text"
-          class="form-control"
           id="name"
           name="name"
-          [(ngModel)]="formData.name"
+          class="form-control"
           required
+          [(ngModel)]="formData.name"
         />
       </div>
+
       <div class="mb-3">
         <label for="email" class="form-label">Email</label>
         <input
           type="email"
-          class="form-control"
           id="email"
           name="email"
-          [(ngModel)]="formData.email"
+          class="form-control"
           required
+          [(ngModel)]="formData.email"
         />
       </div>
+
       <div class="mb-3">
         <label for="message" class="form-label">Message</label>
         <textarea
-          class="form-control"
           id="message"
           name="message"
+          class="form-control"
           rows="5"
-          [(ngModel)]="formData.message"
           required
+          [(ngModel)]="formData.message"
         ></textarea>
       </div>
+
       <button type="submit" class="btn btn-primary btn-lg scale-hover">
         <i class="bi bi-send me-2"></i>Send Message
       </button>
     </form>
+
+    <!-- success alert -->
+    <div *ngIf="formSubmitted" class="col-md-6 mx-auto">
+      <div class="alert alert-success text-center" role="alert">
+        Thank you! Your email has been sent. We’ll keep in touch.
+      </div>
+    </div>
+
+    <!-- error alert -->
+    <div *ngIf="submissionError" class="col-md-6 mx-auto mt-3">
+      <div class="alert alert-danger text-center" role="alert">
+        Oops! Something went wrong. Please try again.
+      </div>
+    </div>
   </div>
 </section>
 
